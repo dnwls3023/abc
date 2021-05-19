@@ -21,31 +21,34 @@ int main()
 			if (arr[i][j] > 0) //0보다 큰 물풍선이라면
 			{
 				int up = 0, down = 0, right = 0, left = 0; //위, 아래, 오른, 왼쪽으로 더 갈지 혹은 멈출지 정할 변수
-				for (k = 1; k <= arr[i][j]; k++) //1부터 물풍선 크기까지
+				int size = arr[i][j];
+				for (k = 1; k <= size; k++) //1부터 물풍선 크기까지
 				{
 					arr[i][j] = -2; //물풍선이 있는 자리는 우선 -2
 					
 					
-					if (arr[i - k][j] != -1 && up == 0 && arr[i-k][j] <=0) //위에가 -1(장애물)이 아니면서 up에 제약이 안 걸리면서 0보다 값이 작은경우
-						arr[i - k][j] = -2; //물풍선 범위로 간주
-					else if (arr[i-k][j] == -1 || (i-k <0)) // 위가 장애물이거나 배열 범위를 벗어난경우
+					if (arr[i-k][j] == -1 || (i-k <0)) // 위가 장애물이거나 배열 범위를 벗어난경우
 						up = 1; //up에 제약을 검
+					else if (arr[i - k][j] != -1 && up == 0 && arr[i-k][j] <=0) //위에가 -1(장애물)이 아니면서 up에 제약이 안 걸리면서 0보다 값이 작은경우
+						arr[i - k][j] = -2; //물풍선 범위로 간주
 
 					//아래, 오른, 왼쪽 코드도 동일한 형태
-					if (arr[i + k][j] != -1 && down == 0 && arr[i + k][j] <= 0)
-						arr[i + k][j] = -2;
-					else if (arr[i + k][j] == -1 || (i + k > 99))
+					if (arr[i + k][j] == -1 || (i + k > 10))
 						down = 1;
+					else if (arr[i + k][j] != -1 && down == 0 && arr[i + k][j] <= 0)
+						arr[i + k][j] = -2;
 
-					if (arr[i][j+k] != -1 && right == 0 && arr[i][j+k] <= 0)
-						arr[i][j+k] = -2;
-					else if (arr[i][j+k] == -1 || (j + k >99))
+					if (arr[i][j+k] == -1 || (j + k >10))
 						right = 1;
+					else if (arr[i][j+k] != -1 && right == 0 && arr[i][j+k] <= 0)
+						arr[i][j+k] = -2;
+					
 
-					if (arr[i][j-k] != -1 && left == 0 && arr[i][j-k] <= 0)
-						arr[i][j-k] = -2;
-					else if (arr[i][j-k] == -1 || (j-k < 0))
+					if (arr[i][j-k] == -1 || (j-k < 0))
 						left = 1;
+					else if (arr[i][j-k] != -1 && left == 0 && arr[i][j-k] <= 0)
+						arr[i][j-k] = -2;
+					
 				}
 			}
 		}
